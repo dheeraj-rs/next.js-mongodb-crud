@@ -1,9 +1,4 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {}
-
-// module.exports = nextConfig
-
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js';
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 
 const config = (phase) => {
   const isDev = phase === PHASE_DEVELOPMENT_SERVER;
@@ -16,4 +11,4 @@ const config = (phase) => {
   };
 };
 
-export default config;
+module.exports = config;
