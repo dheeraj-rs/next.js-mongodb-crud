@@ -1,14 +1,19 @@
-// const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {}
 
-const config = () => {
-  //   const isDev = phase === PHASE_DEVELOPMENT_SERVER;
+// module.exports = nextConfig
+
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js';
+
+const config = (phase) => {
+  const isDev = phase === PHASE_DEVELOPMENT_SERVER;
 
   return {
-    // reactStrictMode: true,
+    reactStrictMode: true,
     env: {
       API_URL: process.env.API_URL,
     },
   };
 };
 
-module.exports = config;
+export default config;
