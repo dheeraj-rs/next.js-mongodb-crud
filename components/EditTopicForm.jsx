@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function EditTopicForm({ id, title, description }) {
   const [newTitle, setNewTitle] = useState(title);
@@ -10,23 +10,26 @@ export default function EditTopicForm({ id, title, description }) {
   const router = useRouter();
 
   const handleSubmit = async (e) => {
+    const apiurl = process.env.API_URL;
+    console.log('apiurl :', apiurl);
+
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:3000/api/topics/${id}`, {
-        method: "PUT",
+      const res = await fetch(`${apiurl}/api/topics/${id}`, {
+        method: 'PUT',
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         body: JSON.stringify({ newTitle, newDescription }),
       });
 
       if (!res.ok) {
-        throw new Error("Failed to update topic");
+        throw new Error('Failed to update topic');
       }
 
       router.refresh();
-      router.push("/");
+      router.push('/');
     } catch (error) {
       console.log(error);
     }

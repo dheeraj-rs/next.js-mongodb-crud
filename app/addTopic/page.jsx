@@ -1,35 +1,36 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AddTopic() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const router = useRouter();
+  const apiurl = process.env.API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!title || !description) {
-      alert("Title and description are required.");
+      alert('Title and description are required.');
       return;
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/topics", {
-        method: "POST",
+      const res = await fetch(`${apiurl}/api/topics`, {
+        method: 'POST',
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         body: JSON.stringify({ title, description }),
       });
 
       if (res.ok) {
-        router.push("/");
+        router.push('/');
       } else {
-        throw new Error("Failed to create a topic");
+        throw new Error('Failed to create a topic');
       }
     } catch (error) {
       console.log(error);
